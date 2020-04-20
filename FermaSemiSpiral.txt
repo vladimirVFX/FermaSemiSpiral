@@ -1,0 +1,25 @@
+//Ferma Semi-Spiral.
+
+int pntcount = chi("Count");        //Number_of_points_on_curve
+float a = chf("angle");             //Curl_angle_of_curve
+float Rx = chf("XRadius");          //Curve_Radius_of_X_position
+float Rz = chf("ZRadius");          //Curve_Radius_of_Z_position
+
+vector pos;                         //Radius-vector_of_each_points
+float x,y,z;                        //Coordinates_of_radius-vector
+int prim = addprim(0,"polyline");   //Additional_primitive_between_next
+                                    //and_previous_points
+
+int newpnt;                         //New_point_position
+
+for (float n=0; n < pntcount; n++)  //Cycle_for_massive_point_position
+{
+   
+    x = Rx * sqrt(n) * cos(n*a);    //X_coordinate_of_points 
+    z = Rz * sqrt(n) * sin(n*a);    //Z_coordinate_of_points
+    
+    pos = set(x,0,z);               //New_points_position
+    newpnt = addpoint(0,pos);       //Create_new_points    
+
+    addvertex(0,prim,newpnt);       //Additional_vertex_for_each_points_on_curve
+}
